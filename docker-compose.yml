@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  pizarra_backend:
+    container_name: pizarra_backend
+    image: arturoucontreras/pizarra_backend:1.0.0
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://pizarra_db:5432/postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - pizarra_db
+
+  pizarra_db:
+    container_name: pizarra_db
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
