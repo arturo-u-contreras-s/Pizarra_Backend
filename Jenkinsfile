@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE_NAME = "pizarra-backend"
+        DOCKER_TAG = "latest"
+        DOCKER_REGISTRY = "aucseng"
+    }
+
     stages {
         stage('Test') {
             agent {
@@ -22,6 +28,24 @@ pipeline {
             }
             steps {
                 sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                agent {
+                    docker {
+                        image 'maven:latest'
+                        reuseNode true
+                    }
+                }
+                script {
+                    // Build the Docker image from the Dockerfile
+                    sh """
+                    docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_TAG} .
+                    docker images
+                    """
+                }
             }
         }
     }
