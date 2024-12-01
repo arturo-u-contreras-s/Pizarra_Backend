@@ -34,7 +34,7 @@ pipeline {
         stage('Build Docker Image') {
             agent {
                 docker {
-                    image 'maven:latest'
+                    image 'docker:latest'
                     reuseNode true
                 }
             }
