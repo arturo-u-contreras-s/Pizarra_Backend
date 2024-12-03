@@ -37,6 +37,7 @@ pipeline {
                     image 'docker:dind'
                     args '--privileged'
                     reuseNode true
+                    options '--user root'
                 }
             }
             steps {
