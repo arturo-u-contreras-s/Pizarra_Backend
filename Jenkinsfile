@@ -35,9 +35,8 @@ pipeline {
             agent {
                 docker {
                     image 'docker:dind'
-                    args '--privileged'
+                    args '--privileged --user root'  // Use args to specify Docker options
                     reuseNode true
-                    options '--user root'
                 }
             }
             steps {
