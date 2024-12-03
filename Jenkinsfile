@@ -42,6 +42,8 @@ pipeline {
             steps {
                 // Build the Docker image from the Dockerfile
                 sh """
+                dockerd --host=unix:///var/run/docker.sock &
+                sleep 5
                 docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_TAG} .
                 docker images
                 """
