@@ -22,6 +22,7 @@ public class PlayerEntity {
 
     private boolean active;
     private boolean legend;
+    private boolean injured;
 
     private String position;
     private String image;

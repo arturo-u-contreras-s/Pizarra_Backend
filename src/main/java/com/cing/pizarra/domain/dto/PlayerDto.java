@@ -18,6 +18,7 @@ public class PlayerDto {
 
     private boolean active;
     private boolean legend;
+    private boolean injured;
 
     private String position;
     private TeamDto team;
